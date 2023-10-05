@@ -23,22 +23,21 @@ namespace IDontKnowCs {
             }
 
         }
+        // ChatGPT cleaned it up for me cuz my version was crap lol
         public static void Populate() {
             Random random = new();
-            int randomColumn = random.Next(COLUMNS);
-            int randomRow = random.Next(ROWS);
-            if (CardValues.Count == 0)
-                return;
-            string val = CardValues[random.Next(CardValues.Count)];
 
-            Card selectedCard = _Cards[randomColumn, randomRow];
-            if (selectedCard.Value == "EMPTY")
-                _Cards[randomColumn, randomRow].Value = val;
-            else
-                Populate();
-            if (_Cards.Cast<Card>().Any(c => c.Value == "EMPTY")) {
-                CardValues.Remove(val);
-                Populate();
+            while (CardValues.Count > 0) {
+                int randomColumn = random.Next(COLUMNS);
+                int randomRow = random.Next(ROWS);
+
+                Card selectedCard = _Cards[randomColumn, randomRow];
+
+                if (selectedCard.Value == "EMPTY") {
+                    string val = CardValues[random.Next(CardValues.Count)];
+                    selectedCard.Value = val;
+                    CardValues.Remove(val);
+                }
             }
         }
 

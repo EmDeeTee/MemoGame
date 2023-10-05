@@ -6,7 +6,7 @@ Gameboard.Populate();
 Card? prevCard = null;
 
 while (true) {
-    Gameboard.Display();
+    Gameboard.Display(true);
     Console.Write("Column: ");
     _ = int.TryParse(Console.ReadLine(), out int col);
     Console.Write("Row: ");
